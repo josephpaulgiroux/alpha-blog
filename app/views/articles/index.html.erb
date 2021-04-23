@@ -1,27 +1,33 @@
-<h1>Articles Listing Page</h1>
 
-<table>
-  <head>
-    <tr>
-      <th>Title</th>
-      <th>Description</th>
-      <th>Actions</th>
-    </tr>
-  </head>
-  <tbody>
-    <% @articles.each do |article| %>
-    <tr>
-      <td><%= article.title %></td>
-      <td><%= article.description %></td>
-      <td><%= link_to 'Show', article_path(article) %></td>
-      <td><%= link_to 'Edit', edit_article_path(article) %></td>
-      <td><%= link_to 'Delete', article_path(article), method: :delete, data: { 
-        confirm: "Are you sure you want to delete this article?" } %></td>
-    </tr>
+<div id="page-content">
+  <h1 class="text-center mt-4">Listing All Articles</h1>
+  
+  <div class="container">
+    <% @articles.each do |article| %>   
+      <div class="row justify-content-md-center">
+        <div class="col-8 mt-4">
+          <div class="card text-center shadow-lg mb-5 bg-white rounded">
+            <div class="card-header font-italic">
+              By Joseph Giroux
+            </div>
+            <div class="card-body">
+              <h5 class="card-title"><%= link_to article.title, article_path(article), class: 'text-success' %></h5>
+              <p class="card-text"><%= truncate(article.description, length: 100) %></p>
+              <%= link_to 'View', article_path(article), class: "btn btn-outline-success" %>
+              <%= link_to 'Edit', edit_article_path(article), class: "btn btn-outline-info"  %>
+              <%= link_to 'Delete', article_path(article), class: "btn btn-outline-danger", method: :delete, data: { 
+                confirm: "Are you sure you want to delete this article?" } %>
+            </div>
+            <div class="card-footer text-muted">
+              <small>Created <%= time_ago_in_words(article.created_at) %> ago,
+              edited <%= time_ago_in_words(article.updated_at) %> ego </small>
+            </div>
+          </div>
+        </div>
+      </div>
     <% end %>
-    <tr>
-      <td><%= link_to 'Create New Article', new_article_path %> </td>
-    </tr>
-      
-  </tbody>
-</table>
+  </div>
+</div>
+
+
+<%= link_to 'Create New Article', new_article_path %> 
