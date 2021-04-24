@@ -1,17 +1,23 @@
 
+<%= render 'layouts/errors' %>
 
 <%= form_with(model: @article, local: true) do |f| %>
-<p>
-  <%= f.label :title %><br/>
-  <%= f.text_field :title %>
-</p>
-
-<p>
-  <%= f.label :description %>
-  <%= f.text_area :description %>
-</p>
-
-<p>
-  <%= f.submit %>
-</p>
+  <div class="form-group row">
+      <%= f.label :title, class: "col-2 col-form-label" %>
+      <div class="col-10">
+        <%= f.text_field :title, class: "form-control" %>
+      </div>
+    
+      <%= f.label :description, class: "col-2 col-form-label" %>
+      <div class="col-10">
+        <%= f.text_area :description, rows: 10, class: "form-control" %>
+      </div>
+    
+    <div class="form-group row">
+      <%= f.submit class: "btn btn-outline-light btn-lg"%>
+    </div>
+    
+  </div>
 <% end %>
+
+<%= link_to 'Return to Articles Listing', articles_path %>
