@@ -1,0 +1,36 @@
+<h1 class="text-center mt-4 font-weight-bold">Log in</h1>
+
+
+        
+  <div class="row justify-content-md-center">
+    <div class="card mt-4 col-8 bg-info shadow-lg ">
+      <div class="card-body">
+        <%= form_with(scope: :session, url: login_path) do |f| %>
+          <div class="form-group row">
+              <%= f.label :email, class: "col-2 col-form-label font-weight-bold text-light" %>
+              <div class="col-10">
+                <%= f.email_field :email, class: "form-control shadow rounded", placeholder: "Enter email address" %>
+              </div>
+          </div>
+          
+            <div class="form-group row">
+              <%= f.label :password, class: "col-2 col-form-label font-weight-bold text-light" %>
+              <div class="col-10">
+                <%= f.password_field :password, class: "form-control shadow rounded", placeholder: "Enter your password" %>
+              </div>
+          </div>
+          
+          <div class="form-group row justify-content-center">
+            <%= f.submit "Log in", class: "btn btn-outline-light btn-lg" %>
+          </div>
+          
+          <div class="form-group row justify-content-center">
+            <%= link_to '[ Return to Articles Listing ]', articles_path, class: "text-light" %>
+          </div>
+            
+        <% end %>
+
+      </div>
+    </div>
+  </div>
+</div>
