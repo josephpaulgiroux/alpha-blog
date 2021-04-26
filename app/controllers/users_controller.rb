@@ -20,6 +20,9 @@ class UsersController < ApplicationController
   end 
   
   def edit
+    if !logged_in || current_user != @user
+      redirect_to users_path
+    end
   end 
   
   def show
@@ -31,7 +34,9 @@ class UsersController < ApplicationController
   end 
   
   def update
-    if @user.update(user_params)
+    if !logged_in || current_user != @user
+      redirect_to users_path
+    elsif @user.update(user_params)
       flash[:notice] = "Your profile details were successfully updated."
       redirect_to @user
     else 
@@ -40,6 +45,9 @@ class UsersController < ApplicationController
   end 
   
   def destroy
+    if !logged_in || current_user != @user
+      redirect_to users_path
+    end
   end 
   
   private 

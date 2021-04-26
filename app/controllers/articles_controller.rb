@@ -14,6 +14,9 @@ class ArticlesController < ApplicationController
   end 
   
   def edit
+    if !logged_in? || current_user != @article.user
+      redirect_to articles_path
+    end
   end 
   
   
@@ -34,7 +37,9 @@ class ArticlesController < ApplicationController
   
   
   def update 
-    if @article.update(article_params)
+    if !logged_in? || current_user != @article.user
+      redirect_to articles_path
+    elsif @article.update(article_params)
       flash[:notice] = "Article was updated successfully."
       redirect_to @article
     else 
@@ -44,7 +49,9 @@ class ArticlesController < ApplicationController
   
   
   def destroy
-    @article.destroy
+    if logged_in? && current_user == @article.user
+      @article.destroy
+    end
     redirect_to articles_path
   end 
   
@@ -52,7 +59,11 @@ class ArticlesController < ApplicationController
   private
   
   def set_article
-    @article = Article.find(params[:id])
+    begin
+      @article = Article.find(params[:id])
+    rescue
+      redirect_to articles_path
+    end
   end 
   
   def article_params
