@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
 
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :edit, :update]
   
   def new
     @user = User.new
@@ -12,6 +12,7 @@ class UsersController < ApplicationController
     if @user.save
       flash[:notice]  = "Welcome, #{@user.username}, your account has been created."
       # :notice or :alert (when something goes wrong)
+      session[:user_id] = @user.id
       redirect_to @user
     else 
       render 'new'
