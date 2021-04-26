@@ -25,6 +25,10 @@ class UsersController < ApplicationController
     @articles = @user.articles
   end 
   
+  def index
+    @users = User.all
+  end 
+  
   def update
     if @user.update(user_params)
       flash[:notice] = "Your profile details were successfully updated."
