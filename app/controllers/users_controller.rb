@@ -12,7 +12,7 @@ class UsersController < ApplicationController
     if @user.save
       flash[:notice]  = "Welcome, #{@user.username}, your account has been created."
       # :notice or :alert (when something goes wrong)
-      redirect_to articles_path
+      redirect_to @user
     else 
       render 'new'
     end
@@ -32,7 +32,7 @@ class UsersController < ApplicationController
   def update
     if @user.update(user_params)
       flash[:notice] = "Your profile details were successfully updated."
-      redirect_to articles_path
+      redirect_to @user
     else 
       render 'edit'    
     end 
